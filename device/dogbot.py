@@ -176,6 +176,8 @@ class Dogbot:
                         delta_dict[Dogbot.PAUSE_MEAL_THING_STATE_KEY])
 
             elif 'desired' in payload_dict['state'].keys():
+                # if request for pause or unpause scheduled feeding and already the same value
+                # delta will not be present, so handle desired and show neopixel change again
                 desired_dict = payload_dict['state']['desired']
                 logging.debug('shadow desired: %s' % desired_dict)
 
@@ -225,37 +227,40 @@ class Dogbot:
         except Exception as e:
             logging.error("unable to check shadow: %s" % e)
 
-
     def handle_shadow_pause_meal_delta(self, shadow_pause_meal_delta):
         logging.debug('handle_shadow_pause_meal_delta: %s' % shadow_pause_meal_delta)
         if shadow_pause_meal_delta:
             self.pause_meal()
         else:
             self.unpause_meal()
-        # not handling any other type of delta
 
     def handle_shadow_meal_delta(self, shadow_meal_delta):
         logging.debug('handle_shadow_meal_delta: %s' % shadow_meal_delta)
         if shadow_meal_delta == Dogbot.DISPENSE_THING_STATE_VALUE:
             self.dispense_meal()
+        # if dispense scheduled event, check if scheduled feeding disabled
         elif shadow_meal_delta == Dogbot.DISPENSE_SCHEDULED_THING_STATE_VALUE and not self.pause_meal_enabled:
             self.dispense_meal()
         else:
             self.update_shadow_reported(Dogbot.MEAL_THING_STATE_KEY,
                                         Dogbot.READY_THING_STATE_VALUE)
-        # not handling any other type of delta
 
     def handle_shadow_treat_delta(self, shadow_treat_delta):
         logging.debug('handle_shadow_treat_delta: %s' % shadow_treat_delta)
         if shadow_treat_delta == Dogbot.DISPENSE_THING_STATE_VALUE:
             self.dispense_treat()
-        # not handling any other type of delta
+        # if dispense scheduled event, check if scheduled feeding disabled
+        elif shadow_treat_delta == Dogbot.DISPENSE_SCHEDULED_THING_STATE_VALUE and not self.pause_meal_enabled:
+            self.dispense_treat()
+        else:
+            self.update_shadow_reported(Dogbot.TREAT_THING_STATE_KEY,
+                                        Dogbot.READY_THING_STATE_VALUE)            
 
     def handle_shadow_water_delta(self, shadow_water_delta):
         logging.debug('handle_shadow_water_delta: %s' % shadow_water_delta)
-        if shadow_water_delta == Dogbot.DISPENSE_THING_STATE_VALUE:
+        # always dispense water to keep bowl fresh, even if paused
+        if shadow_water_delta == Dogbot.DISPENSE_THING_STATE_VALUE or shadow_water_delta == Dogbot.DISPENSE_SCHEDULED_THING_STATE_VALUE:
             self.dispense_water()
-        # not handling any other type of delta
 
     def pause_meal(self):
         self.lock_dogbot_state()

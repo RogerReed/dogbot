@@ -40,10 +40,10 @@ functions:
     handler: schedule_handler.dispense_meal
     events:      
       - schedule:
-          rate: cron(0 7 * * ? *)
+          rate: cron(0 5 30 * ? *)
           timezone: America/Los_Angeles
       - schedule:
-          rate: cron(0 18 * * ? *)
+          rate: cron(0 17 30 * ? *)
           timezone: America/Los_Angeles
   dispense-treat:
     handler: schedule_handler.dispense_treat
