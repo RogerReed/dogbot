@@ -32,3 +32,6 @@ device/certs
 
 # creds
 device/creds
+
+# log
+device/dogbot.log
