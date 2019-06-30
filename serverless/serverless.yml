@@ -39,23 +39,46 @@ functions:
   dispense-meal:
     handler: schedule_handler.dispense_meal
     events:      
+      # breakfast 
       - schedule:
-          rate: cron(0 5 30 * ? *)
+          rate: cron(30 5 * * ? *)
           timezone: America/Los_Angeles
+      # dinner 
       - schedule:
-          rate: cron(0 17 30 * ? *)
+          rate: cron(30 17 * * ? *)
           timezone: America/Los_Angeles
   dispense-treat:
     handler: schedule_handler.dispense_treat
     events:      
+      # mid-day treat 
       - schedule:
-          rate: cron(0 12 * * ? *)
+          rate: cron(15 12 * * ? *)
           timezone: America/Los_Angeles
   dispense-water:
     handler: schedule_handler.dispense_water
     events:      
+      # fill up water 15 min before breakfast
       - schedule:
-          rate: cron(0 6 * * ? *)
+          rate: cron(15 5 * * ? *)
+          timezone: America/Los_Angeles
+      - schedule:
+          rate: cron(0 8 * * ? *)
+          timezone: America/Los_Angeles
+      - schedule:
+          rate: cron(0 11 * * ? *)
+          timezone: America/Los_Angeles
+      - schedule:
+          rate: cron(0 14 * * ? *)
+          timezone: America/Los_Angeles
+      # fill up water 30 min before dinner
+      - schedule:
+          rate: cron(0 17 * * ? *)
+          timezone: America/Los_Angeles
+      - schedule:
+          rate: cron(0 20 * * ? *)
+          timezone: America/Los_Angeles
+      - schedule:
+          rate: cron(0 23 * * ? *)
           timezone: America/Los_Angeles
 
 #    The following are a few example events you can configure
