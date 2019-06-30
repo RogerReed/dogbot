@@ -1,0 +1,4 @@
+AWSIoTPythonSDK
+boto3
+slackclient
+PiCamera

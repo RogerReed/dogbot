@@ -1,0 +1,14 @@
+{
+  "name": "dogbot",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "serverless": "^1.45.1",
+    "to": "^0.2.9",
+    "update": "^0.7.4"
+  },
+  "devDependencies": {
+    "serverless-local-schedule": "^0.1.6",
+    "serverless-python-requirements": "^4.3.0"
+  }
+}

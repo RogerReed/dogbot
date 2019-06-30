@@ -1,0 +1,24 @@
+2019-06-28 11:20:36,537 - root - INFO - AWS IoT shadow handler initialized
+2019-06-28 11:20:36,537 - root - ERROR - unable to inialize camera: __init__() takes no arguments (1 given)
+2019-06-28 11:20:36,537 - root - INFO - neopixel LED strip initialized
+2019-06-28 11:22:27,097 - root - INFO - AWS IoT shadow handler initialized
+2019-06-28 11:22:27,097 - root - ERROR - unable to inialize camera: __init__() takes no arguments (1 given)
+2019-06-28 11:22:27,097 - root - INFO - neopixel LED strip initialized
+2019-06-28 11:22:46,192 - root - INFO - AWS IoT shadow handler initialized
+2019-06-28 11:22:46,192 - root - ERROR - unable to inialize camera: __init__() takes no arguments (1 given)
+2019-06-28 11:22:46,193 - root - INFO - neopixel LED strip initialized
+2019-06-28 11:23:12,032 - root - INFO - AWS IoT shadow handler initialized
+2019-06-28 11:23:12,033 - root - ERROR - unable to inialize camera: __init__() takes no arguments (1 given)
+2019-06-28 11:23:12,033 - root - INFO - neopixel LED strip initialized
+2019-06-28 11:23:17,783 - root - INFO - AWS IoT shadow handler initialized
+2019-06-28 11:23:17,783 - root - ERROR - unable to inialize camera: __init__() takes no arguments (1 given)
+2019-06-28 11:23:17,784 - root - INFO - neopixel LED strip initialized
+2019-06-28 11:24:07,079 - root - INFO - AWS IoT shadow handler initialized
+2019-06-28 11:24:07,079 - root - ERROR - unable to inialize camera: __init__() takes no arguments (1 given)
+2019-06-28 11:24:07,080 - root - INFO - neopixel LED strip initialized
+2019-06-28 11:24:30,544 - root - INFO - AWS IoT shadow handler initialized
+2019-06-28 11:24:30,545 - root - ERROR - unable to inialize camera: __init__() takes no arguments (1 given)
+2019-06-28 11:24:30,545 - root - INFO - neopixel LED strip initialized
+2019-06-28 11:29:56,043 - root - INFO - AWS IoT shadow handler initialized
+2019-06-28 11:29:56,044 - root - ERROR - unable to inialize camera: __init__() takes no arguments (1 given)
+2019-06-28 11:29:56,044 - root - INFO - neopixel LED strip initialized

@@ -1,0 +1,218 @@
+{
+    "LabelModelVersion": "2.0",
+    "Labels": [
+        {
+            "Confidence": 99.20922088623047,
+            "Instances": [
+                {
+                    "BoundingBox": {
+                        "Height": 0.9176838994026184,
+                        "Left": 0.19866567850112915,
+                        "Top": 0.06940799206495285,
+                        "Width": 0.48922857642173767
+                    },
+                    "Confidence": 99.20922088623047
+                }
+            ],
+            "Name": "Dog",
+            "Parents": [
+                {
+                    "Name": "Animal"
+                },
+                {
+                    "Name": "Mammal"
+                },
+                {
+                    "Name": "Pet"
+                },
+                {
+                    "Name": "Canine"
+                }
+            ]
+        },
+        {
+            "Confidence": 99.20922088623047,
+            "Instances": [],
+            "Name": "Mammal",
+            "Parents": [
+                {
+                    "Name": "Animal"
+                }
+            ]
+        },
+        {
+            "Confidence": 99.20922088623047,
+            "Instances": [],
+            "Name": "Animal",
+            "Parents": []
+        },
+        {
+            "Confidence": 99.20922088623047,
+            "Instances": [],
+            "Name": "Pet",
+            "Parents": [
+                {
+                    "Name": "Animal"
+                }
+            ]
+        },
+        {
+            "Confidence": 99.20922088623047,
+            "Instances": [],
+            "Name": "Canine",
+            "Parents": [
+                {
+                    "Name": "Animal"
+                },
+                {
+                    "Name": "Mammal"
+                }
+            ]
+        },
+        {
+            "Confidence": 98.27426147460938,
+            "Instances": [],
+            "Name": "Hound",
+            "Parents": [
+                {
+                    "Name": "Animal"
+                },
+                {
+                    "Name": "Dog"
+                },
+                {
+                    "Name": "Mammal"
+                },
+                {
+                    "Name": "Pet"
+                },
+                {
+                    "Name": "Canine"
+                }
+            ]
+        },
+        {
+            "Confidence": 89.45755767822266,
+            "Instances": [],
+            "Name": "Beagle",
+            "Parents": [
+                {
+                    "Name": "Dog"
+                },
+                {
+                    "Name": "Mammal"
+                },
+                {
+                    "Name": "Animal"
+                },
+                {
+                    "Name": "Pet"
+                },
+                {
+                    "Name": "Hound"
+                },
+                {
+                    "Name": "Canine"
+                }
+            ]
+        },
+        {
+            "Confidence": 78.41224670410156,
+            "Instances": [],
+            "Name": "Plant",
+            "Parents": []
+        },
+        {
+            "Confidence": 78.41224670410156,
+            "Instances": [],
+            "Name": "Jar",
+            "Parents": []
+        },
+        {
+            "Confidence": 78.41224670410156,
+            "Instances": [],
+            "Name": "Potted Plant",
+            "Parents": [
+                {
+                    "Name": "Vase"
+                },
+                {
+                    "Name": "Plant"
+                },
+                {
+                    "Name": "Jar"
+                },
+                {
+                    "Name": "Pottery"
+                }
+            ]
+        },
+        {
+            "Confidence": 78.41224670410156,
+            "Instances": [],
+            "Name": "Pottery",
+            "Parents": []
+        },
+        {
+            "Confidence": 78.41224670410156,
+            "Instances": [],
+            "Name": "Vase",
+            "Parents": [
+                {
+                    "Name": "Pottery"
+                },
+                {
+                    "Name": "Jar"
+                }
+            ]
+        },
+        {
+            "Confidence": 71.82299041748047,
+            "Instances": [],
+            "Name": "Strap",
+            "Parents": []
+        },
+        {
+            "Confidence": 69.02041625976562,
+            "Instances": [],
+            "Name": "Brick",
+            "Parents": []
+        },
+        {
+            "Confidence": 67.32184600830078,
+            "Instances": [],
+            "Name": "Flagstone",
+            "Parents": []
+        },
+        {
+            "Confidence": 66.95600128173828,
+            "Instances": [],
+            "Name": "Slate",
+            "Parents": []
+        },
+        {
+            "Confidence": 65.4269790649414,
+            "Instances": [],
+            "Name": "Tire",
+            "Parents": []
+        },
+        {
+            "Confidence": 59.96010208129883,
+            "Instances": [],
+            "Name": "Clothing",
+            "Parents": []
+        },
+        {
+            "Confidence": 59.96010208129883,
+            "Instances": [],
+            "Name": "Apparel",
+            "Parents": []
+        },
+        {
+            "Confidence": 55.69321060180664,
+            "Instances": [],
+            "Name": "Window",
+            "Parents": []
+        }
+    ]
+}

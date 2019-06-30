@@ -1,0 +1,131 @@
+{u'Labels': [
+        {u'Instances': [
+                {u'BoundingBox': {u'Width': 0.16387903690338135, u'Top': 0.5627934336662292, u'Left': 0.2308778464794159, u'Height': 0.10760339349508286
+                    }, u'Confidence': 86.50067138671875
+                }
+            ], u'Confidence': 86.50067138671875, u'Parents': [
+                {u'Name': u'Animal'
+                },
+                {u'Name': u'Canine'
+                },
+                {u'Name': u'Mammal'
+                },
+                {u'Name': u'Pet'
+                }
+            ], u'Name': u'Dog'
+        },
+        {u'Instances': [], u'Confidence': 86.50067138671875, u'Parents': [
+                {u'Name': u'Animal'
+                }
+            ], u'Name': u'Pet'
+        },
+        {u'Instances': [], u'Confidence': 86.50067138671875, u'Parents': [
+                {u'Name': u'Animal'
+                }
+            ], u'Name': u'Mammal'
+        },
+        {u'Instances': [], u'Confidence': 86.50067138671875, u'Parents': [
+                {u'Name': u'Animal'
+                },
+                {u'Name': u'Mammal'
+                }
+            ], u'Name': u'Canine'
+        },
+        {u'Instances': [], u'Confidence': 86.50067138671875, u'Parents': [], u'Name': u'Animal'
+        },
+        {u'Instances': [], u'Confidence': 85.70987701416016, u'Parents': [], u'Name': u'Fisheye'
+        },
+        {u'Instances': [
+                {u'BoundingBox': {u'Width': 0.05234187841415405, u'Top': 0.47079840302467346, u'Left': 0.18907329440116882, u'Height': 0.15878050029277802
+                    }, u'Confidence': 82.51416015625
+                }
+            ], u'Confidence': 82.51416015625, u'Parents': [
+                {u'Name': u'Machine'
+                }
+            ], u'Name': u'Wheel'
+        },
+        {u'Instances': [], u'Confidence': 82.51416015625, u'Parents': [], u'Name': u'Machine'
+        },
+        {u'Instances': [], u'Confidence': 76.89614868164062, u'Parents': [], u'Name': u'Wood'
+        },
+        {u'Instances': [], u'Confidence': 76.89614868164062, u'Parents': [
+                {u'Name': u'Wood'
+                }
+            ], u'Name': u'Plywood'
+        },
+        {u'Instances': [], u'Confidence': 68.76203918457031, u'Parents': [], u'Name': u'Amusement Park'
+        },
+        {u'Instances': [], u'Confidence': 68.76203918457031, u'Parents': [
+                {u'Name': u'Amusement Park'
+                }
+            ], u'Name': u'Theme Park'
+        },
+        {u'Instances': [
+                {u'BoundingBox': {u'Width': 0.05083811283111572, u'Top': 0.4281919002532959, u'Left': 0.3623422682285309, u'Height': 0.09460750967264175
+                    }, u'Confidence': 64.83815002441406
+                },
+                {u'BoundingBox': {u'Width': 0.05424441397190094, u'Top': 0.635891854763031, u'Left': 0.06853161752223969, u'Height': 0.16520988941192627
+                    }, u'Confidence': 60.141963958740234
+                },
+                {u'BoundingBox': {u'Width': 0.03695143759250641, u'Top': 0.36704421043395996, u'Left': 0.08486418426036835, u'Height': 0.08093412965536118
+                    }, u'Confidence': 60.12338638305664
+                },
+                {u'BoundingBox': {u'Width': 0.05460464954376221, u'Top': 0.3384995460510254, u'Left': 0.39268383383750916, u'Height': 0.1100611686706543
+                    }, u'Confidence': 56.552085876464844
+                }
+            ], u'Confidence': 64.83815002441406, u'Parents': [], u'Name': u'Person'
+        },
+        {u'Instances': [], u'Confidence': 64.83815002441406, u'Parents': [], u'Name': u'Human'
+        },
+        {u'Instances': [], u'Confidence': 63.56793975830078, u'Parents': [], u'Name': u'Tire'
+        },
+        {u'Instances': [
+                {u'BoundingBox': {u'Width': 0.15905244648456573, u'Top': 0.5598579049110413, u'Left': 0.2331729382276535, u'Height': 0.11240911483764648
+                    }, u'Confidence': 62.22238540649414
+                }
+            ], u'Confidence': 62.22238540649414, u'Parents': [
+                {u'Name': u'Animal'
+                },
+                {u'Name': u'Mammal'
+                },
+                {u'Name': u'Pet'
+                }
+            ], u'Name': u'Cat'
+        },
+        {u'Instances': [], u'Confidence': 59.9885368347168, u'Parents': [], u'Name': u'Building'
+        },
+        {u'Instances': [], u'Confidence': 53.83600997924805, u'Parents': [], u'Name': u'Transportation'
+        },
+        {u'Instances': [], u'Confidence': 51.4171257019043, u'Parents': [
+                {u'Name': u'Transportation'
+                }
+            ], u'Name': u'Vehicle'
+        },
+        {u'Instances': [], u'Confidence': 50.578643798828125, u'Parents': [
+                {u'Name': u'Transportation'
+                },
+                {u'Name': u'Car'
+                },
+                {u'Name': u'Vehicle'
+                }
+            ], u'Name': u'Sports Car'
+        },
+        {u'Instances': [], u'Confidence': 50.578643798828125, u'Parents': [
+                {u'Name': u'Transportation'
+                },
+                {u'Name': u'Vehicle'
+                }
+            ], u'Name': u'Car'
+        },
+        {u'Instances': [], u'Confidence': 50.578643798828125, u'Parents': [
+                {u'Name': u'Transportation'
+                },
+                {u'Name': u'Vehicle'
+                }
+            ], u'Name': u'Automobile'
+        }
+    ], 'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'RequestId': '46a02827-9874-11e9-b7a7-5f8ff1df0254', 'HTTPHeaders': {'date': 'Thu,
+            27 Jun 2019 00: 41: 19 GMT', 'x-amzn-requestid': '46a02827-9874-11e9-b7a7-5f8ff1df0254', 'content-length': '3258', 'content-type': 'application/x-amz-json-1.1', 'connection': 'keep-alive'
+        }
+    }, u'LabelModelVersion': u'2.0'
+}
