@@ -23,4 +23,11 @@ sudo systemctl daemon-reload
 sudo systemctl enable dogbot.service
 sudo systemctl start dogbot.service
 
+##
+/boot/config.txt
+arm_freq=900
+arm_freq_min=600
 
+pi@raspberrypi:~ $ lscpu | grep "MHz"
+CPU max MHz:           900.0000
+CPU min MHz:           600.0000

@@ -26,6 +26,6 @@ def init_shadow_handler(ats_iot_host, ats_iot_port, shadow_name):
 
         logging.info('AWS IoT shadow handler initialized')
     except Exception as e:
-        logging.error("unable to inialize shadow handler: %s" % e)
+        logging.error("unable to initialize shadow handler: %s" % e)
 
     return shadow_handler 

@@ -27,10 +27,13 @@ def rekognize_label_in_image(filename, label_name, max_labels=DEFAULT_REKOGNITIO
             MaxLabels=max_labels,
             MinConfidence=min_confidence
         )
-
+ 
         logging.debug("rekognition response: %s", rekognition_response )
 
         label_dict = next((label for label in rekognition_response['Labels'] if label['Name'].lower() == label_name.lower()), None)
-
-        return label_dict is not None and label_dict["Confidence"] > min_confidence
+        dog_rekognized = label_dict is not None and label_dict["Confidence"] > min_confidence
+ 
+        logging.info("%s%s rekognized in photo" % (label_name, ("" if dog_rekognized else " not")))
+ 
+        return dog_rekognized
  
