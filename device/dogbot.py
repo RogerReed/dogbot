@@ -38,9 +38,13 @@ class Dogbot:
     MEAL_AUGER_MOTOR_PIN = 13
     TREAT_AUGER_MOTOR_PIN = 19
     WATER_RELAY_PIN = 26
-
+ 
+    # slight duration changes in run time determine how many treats, or amount of food
+    # and water dispenses - ideally a motor with lower rotation per minute (rpm) would
+    # be used, but these faster motors were what I had on hand, or pwm could be used
+    # to control motor speed
     TREAT_AUGER_MOTOR_RUN_SEC = 0.8
-    MEAL_AUGER_MOTOR_RUN_SEC = 1.4
+    MEAL_AUGER_MOTOR_RUN_SEC = 1.1
     REFILL_WATER_RELAY_ON_SEC = 20
   
     DOGBOT_STATE_IDLE = 0
@@ -48,7 +52,7 @@ class Dogbot:
     DOGBOT_STATE_TREATING = 2
     DOGBOT_STATE_WATERING = 3
     DOGBOT_STATE_CHANGING_PAUSE_MEAL = 4
-
+ 
     REKOGNITION_LABEL_MATCH = "dog"
 
     FIRST_CAMERA_CAPTURE_DELAY_SEC = 0
@@ -71,7 +75,8 @@ class Dogbot:
         self.dogbot_state = Dogbot.DOGBOT_STATE_IDLE
         self.dogbot_state_lock = Lock()
         self.dogbot_state_active_interrupt = Event()
-        self.image_transfer_lock = Lock() # used to only upload one image at time to avoid overloading slow network
+        # used to only upload one image at time to avoid overloading slow network
+        self.image_transfer_lock = Lock() 
 
         self.initial_shadow_get = True
         self.pause_meal_enabled = False

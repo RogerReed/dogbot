@@ -50,9 +50,9 @@ functions:
   dispense-treat:
     handler: schedule_handler.dispense_treat
     events:      
-      # mid-day treat 
+      # mid-day treat 4 times a month (lula is getting too round according to the vet)
       - schedule:
-          rate: cron(15 12 * * ? *)
+          rate: cron(15 12 7,14,21,28 * ? *)
           timezone: America/Los_Angeles
   dispense-water:
     handler: schedule_handler.dispense_water
