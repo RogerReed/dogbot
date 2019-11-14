@@ -21,13 +21,13 @@ DOG_NAME = "Lula"
 
 SKILL_NAME = "dogbot"
 
-HELP_MESSAGE= "You can say feed {dog_name}, or give {dog_name} a treat, or give {dog_name} water... What can I help you with?"
+HELP_MESSAGE = "You can say feed {dog_name}, or give {dog_name} a treat, or give {dog_name} water... What can I help you with?"
 HELP_REPROMPT = "What else can I help you with?"
 STOP_MESSAGE = "Goodbye!"
 FALLBACK_MESSAGE = "The dog bot skill can't help you with that.  It can help you take care of your dog {dog_name}.  What else can I help you with?"
 FALLBACK_REPROMPT = "What can I help you with?"
 EXCEPTION_MESSAGE = "Sorry. I cannot help you with that."
-WELCOME_MESSAGE = "Welcome to the dog bot Skill! " #+ HELP_MESSAGE # help message too long and repetitive on startup
+WELCOME_MESSAGE = "Welcome to the dog bot Skill! "
 WHAT_DO_YOU_WANT_PROMPT = "What do you want to ask?"
 FEEDING_MESSAGE = "Feeding {dog_name}!"
 TREATING_MESSAGE = "Giving {dog_name} a treat!"
@@ -49,6 +49,7 @@ log.setLevel(logging.DEBUG)
 sb = SkillBuilder()
 sb.skill_id = "amzn1.ask.skill.f0ebee3a-72fa-4e3a-8490-c4b68e7aabff"
 
+
 class LaunchRequestHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
@@ -56,8 +57,10 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        handler_input.response_builder.speak(WELCOME_MESSAGE.format(dog_name=DOG_NAME)).ask(WHAT_DO_YOU_WANT_PROMPT)
+        handler_input.response_builder.speak(WELCOME_MESSAGE.format(
+            dog_name=DOG_NAME)).ask(WHAT_DO_YOU_WANT_PROMPT)
         return handler_input.response_builder.response
+
 
 class PauseMealIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -67,13 +70,15 @@ class PauseMealIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         log.info("PauseMealIntentHandler")
-        
-        shadow_util.update_shadow_desired(THING_NAME, PAUSE_MEAL_THING_STATE_KEY, True)
+
+        shadow_util.update_shadow_desired(
+            THING_NAME, PAUSE_MEAL_THING_STATE_KEY, True)
 
         handler_input.response_builder.speak(PAUSING_MEAL_MESSAGE.format(dog_name=DOG_NAME)).ask(
             HELP_REPROMPT).set_card(SimpleCard(
                 SKILL_NAME, HELP_MESSAGE.format(dog_name=DOG_NAME)))
         return handler_input.response_builder.response
+
 
 class UnpauseMealIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -83,13 +88,15 @@ class UnpauseMealIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         log.info("UnpauseMealIntentHandler")
-        
-        shadow_util.update_shadow_desired(THING_NAME, PAUSE_MEAL_THING_STATE_KEY, False)
+
+        shadow_util.update_shadow_desired(
+            THING_NAME, PAUSE_MEAL_THING_STATE_KEY, False)
 
         handler_input.response_builder.speak(UNPAUSING_MEAL_MESSAGE.format(dog_name=DOG_NAME)).ask(
             HELP_REPROMPT).set_card(SimpleCard(
                 SKILL_NAME, HELP_MESSAGE.format(dog_name=DOG_NAME)))
         return handler_input.response_builder.response
+
 
 class MealIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -99,13 +106,15 @@ class MealIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         log.info("MealIntentHandler")
-        
-        shadow_util.update_shadow_desired(THING_NAME, MEAL_THING_STATE_KEY, DISPENSE_THING_STATE_VALUE)
+
+        shadow_util.update_shadow_desired(
+            THING_NAME, MEAL_THING_STATE_KEY, DISPENSE_THING_STATE_VALUE)
 
         handler_input.response_builder.speak(FEEDING_MESSAGE.format(dog_name=DOG_NAME)).ask(
             HELP_REPROMPT).set_card(SimpleCard(
                 SKILL_NAME, HELP_MESSAGE.format(dog_name=DOG_NAME)))
         return handler_input.response_builder.response
+
 
 class TreatIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -115,14 +124,16 @@ class TreatIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         log.info("TreatIntentHandler")
-        
-        shadow_util.update_shadow_desired(THING_NAME, TREAT_THING_STATE_KEY, DISPENSE_THING_STATE_VALUE)
+
+        shadow_util.update_shadow_desired(
+            THING_NAME, TREAT_THING_STATE_KEY, DISPENSE_THING_STATE_VALUE)
 
         handler_input.response_builder.speak(TREATING_MESSAGE.format(dog_name=DOG_NAME)).ask(
             HELP_REPROMPT).set_card(SimpleCard(
                 SKILL_NAME, HELP_MESSAGE.format(dog_name=DOG_NAME)))
         return handler_input.response_builder.response
-    
+
+
 class WaterIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
@@ -131,13 +142,15 @@ class WaterIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         log.info("WaterIntentHandler")
-        
-        shadow_util.update_shadow_desired(THING_NAME, WATER_THING_STATE_KEY, DISPENSE_THING_STATE_VALUE)
+
+        shadow_util.update_shadow_desired(
+            THING_NAME, WATER_THING_STATE_KEY, DISPENSE_THING_STATE_VALUE)
 
         handler_input.response_builder.speak(WATERING_MESSAGE.format(dog_name=DOG_NAME)).ask(
             HELP_REPROMPT).set_card(SimpleCard(
                 SKILL_NAME, HELP_MESSAGE.format(dog_name=DOG_NAME)))
         return handler_input.response_builder.response
+
 
 class HelpIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -153,6 +166,7 @@ class HelpIntentHandler(AbstractRequestHandler):
                 SKILL_NAME, HELP_MESSAGE.format(dog_name=DOG_NAME)))
         return handler_input.response_builder.response
 
+
 class CancelOrStopIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
@@ -165,6 +179,7 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
 
         handler_input.response_builder.speak(STOP_MESSAGE)
         return handler_input.response_builder.response
+
 
 class FallbackIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -193,6 +208,7 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
             handler_input.request_envelope.request.reason))
         return handler_input.response_builder.response
 
+
 class CatchAllExceptionHandler(AbstractExceptionHandler):
     def can_handle(self, handler_input, exception):
         # type: (HandlerInput, Exception) -> bool
@@ -208,16 +224,19 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 
         return handler_input.response_builder.response
 
+
 class Requestlog(AbstractRequestInterceptor):
     def process(self, handler_input):
         # type: (HandlerInput) -> None
         log.debug("========Alexa Request======== {}".format(
             handler_input.request_envelope.request))
 
+
 class Responselog(AbstractResponseInterceptor):
     def process(self, handler_input, response):
         # type: (HandlerInput, Response) -> None
         log.debug("========Alexa Response======== {}".format(response))
+
 
 sb.add_request_handler(LaunchRequestHandler())
 
