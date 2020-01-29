@@ -5,10 +5,10 @@ LED_COUNT = 150
 class Adafruit_NeoPixel(object):
     def __init__(self, num, pin, freq_hz=800000, dma=10, invert=False,
 			brightness=255, channel=0, strip_type=0):
-        pass
+        pass 
 
     def begin(self):
-        pass
+        pass  
         
     def show(self):
         pass

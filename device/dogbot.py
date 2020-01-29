@@ -16,7 +16,7 @@ from util import neopixel_util, camera_util, rekognition_util, shadow_util, slac
 logging.config.fileConfig('logging.ini')
 
 DOG_NAME = "Lula"
-SHADOW_NAME = "dogbot"
+SHADOW_NAME = "dogbot" 
 
 ATS_IOT_ENDPOINT_HOST = "a19u360l2irzg8-ats.iot.us-east-1.amazonaws.com"
 ATS_IOT_ENDPOINT_PORT = 8883
@@ -43,8 +43,8 @@ class Dogbot:
     # and water dispenses - ideally a motor with lower rotation per minute (rpm) would
     # be used, but these faster motors were what I had on hand, or pwm could be used
     # to control motor speed
-    TREAT_AUGER_MOTOR_RUN_SEC = 0.8
-    MEAL_AUGER_MOTOR_RUN_SEC = 1.1
+    TREAT_AUGER_MOTOR_RUN_SEC = 5
+    MEAL_AUGER_MOTOR_RUN_SEC = 8
     REFILL_WATER_RELAY_ON_SEC = 20
   
     DOGBOT_STATE_IDLE = 0
@@ -57,7 +57,7 @@ class Dogbot:
 
     FIRST_CAMERA_CAPTURE_DELAY_SEC = 0
     SECOND_CAMERA_CAPTURE_DELAY_SEC = 15
-    THIRD_CAMERA_CAPTURE_DELAY_SEC = 45
+    THIRD_CAMERA_CAPTURE_DELAY_SEC = 30
 
     SHADOW_OPERATION_TIMEOUT_SEC = 30
 
@@ -85,8 +85,8 @@ class Dogbot:
 
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(Dogbot.MEAL_AUGER_MOTOR_PIN, GPIO.OUT, initial=GPIO.LOW)
-        GPIO.setup(Dogbot.TREAT_AUGER_MOTOR_PIN, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(Dogbot.MEAL_AUGER_MOTOR_PIN, GPIO.OUT, initial=GPIO.HIGH)
+        GPIO.setup(Dogbot.TREAT_AUGER_MOTOR_PIN, GPIO.OUT, initial=GPIO.HIGH)
         GPIO.setup(Dogbot.WATER_RELAY_PIN, GPIO.OUT, initial=GPIO.HIGH)
 
         self.shadow_handler = None
@@ -97,7 +97,7 @@ class Dogbot:
             except Exception as e:
                 logging.error("unable to initialize shadow handler; retrying in 5 sec: %s" % e)    
                 time.sleep(5)
-
+ 
         self.camera = camera_util.init_camera()
  
         self.strip = neopixel_util.init_strip()
@@ -331,9 +331,9 @@ class Dogbot:
                                     Dogbot.DISPENSE_THING_STATE_VALUE)
         thread.start_new_thread(neopixel_util.rainbow, (self.strip, 10))
 
-        GPIO.output(Dogbot.MEAL_AUGER_MOTOR_PIN, GPIO.HIGH)
-        time.sleep(Dogbot.MEAL_AUGER_MOTOR_RUN_SEC)
         GPIO.output(Dogbot.MEAL_AUGER_MOTOR_PIN, GPIO.LOW)
+        time.sleep(Dogbot.MEAL_AUGER_MOTOR_RUN_SEC)
+        GPIO.output(Dogbot.MEAL_AUGER_MOTOR_PIN, GPIO.HIGH)
 
         neopixel_util.colorWipe(self.strip, neopixel_util.COLOR_BLACK, 2)
         self.update_shadow_reported(
@@ -356,10 +356,10 @@ class Dogbot:
         thread.start_new_thread(
             neopixel_util.theaterChaseRainbow, (self.strip,))
 
-        GPIO.output(Dogbot.TREAT_AUGER_MOTOR_PIN, GPIO.HIGH)
-        time.sleep(Dogbot.TREAT_AUGER_MOTOR_RUN_SEC)
         GPIO.output(Dogbot.TREAT_AUGER_MOTOR_PIN, GPIO.LOW)
-
+        time.sleep(Dogbot.TREAT_AUGER_MOTOR_RUN_SEC)
+        GPIO.output(Dogbot.TREAT_AUGER_MOTOR_PIN, GPIO.HIGH)
+ 
         neopixel_util.colorWipe(self.strip, neopixel_util.COLOR_BLACK, 2)
         self.update_shadow_reported(
             Dogbot.TREAT_THING_STATE_KEY, Dogbot.READY_THING_STATE_VALUE)

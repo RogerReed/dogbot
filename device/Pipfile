@@ -1,8 +1,9 @@
 [packages]
 AWSIoTPythonSDK = "*"
 boto3 = "*"
-slackclient = "*"
-PiCamera = "*"
+slackclient = "1.3.2"
+picamera = "1.13"
+RPi.GPIO = "*"
 
 [requires]
 python_version = "2.7"
