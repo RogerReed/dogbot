@@ -31,7 +31,7 @@ Follow this tutorial to prep the OS, disable audio, and install the neopixel lib
 1. Update package sources:
 ```
 sudo apt-get update
-sudo apt-get install gcc make build-essential python-dev git scons swig
+sudo apt-get install gcc make build-essential python-dev git scons swig python-pip
 ```
 2. Deactivate audio port which conflicts with PWM needed for neopixels:
 ```
@@ -72,10 +72,12 @@ sudo python setup.py install
 ### Deploy Python Code
 1. SFTP files from this repo's *device* path to your Pi in */home/pi/dogbot* path (except any files you may have in place to mock GPIO or neopixel for local development)
 2. From */home/pi/dogbot* path install requirements (with requirements.txt since pipenv isn't great on Raspberry Pi)
+
+Note: Needs to be run as sudo, since dogbot.py runs as root for dev permissions needed by neopixel
 ```
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 ```
-3. Ensure *device/certs* are included as referenced in code
+1. Ensure *device/certs* are included as referenced in code
 
 ### Sync Files During Development
 Use the Visual Studio Code SFTP plugin (see .vscode/sftp.json configuration) to sync code to Raspberry Pi as you make changes.
@@ -113,8 +115,36 @@ ping = 8.8.8.8
 interval = 15
 ```
 
+## Set hotplug to prevent hanging on boot
+Update /boot/config.txt to add
+```
+hdmi_force_hotplug=1
+```
+
+## (Optional) Prep external drive for dogbot (more reliable than sdcard)
+Create partition using fdisk (change /dev/sda to drive found using lsblk)
+```
+sudo fdisk /dev/sda
+```
+
+Make ext4 file system on drive and label
+```
+sudo mkfs -t ext4 -L DATA /dev/sda
+```
+
+Add fstab entry and mount
+```
+LABEL=DATA	/home/pi/dogbot	ext4	defaults	0	2
+```
+
+## (Optional) Set max USB current when using external drive
+Update /boot/config.txt to add
+```
+max_usb_current=1
+```
+
 ## (Optional) Underclock Pi CPU to prevent overheating 
-Update /boot/config.txt to 
+Update /boot/config.txt to add
 ```
 arm_freq=900
 arm_freq_min=600

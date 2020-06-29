@@ -5,8 +5,13 @@ Conflicts=getty@tty1.service
 
 [Service]
 Type=simple
+WorkingDirectory=/home/pi/dogbot
 ExecStart=/usr/bin/python /home/pi/dogbot/dogbot.py
 StandardInput=tty-force
+#StandardOutput=syslog
+#StandardError=syslog
+Restart=always
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target

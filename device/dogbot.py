@@ -21,6 +21,8 @@ SHADOW_NAME = "dogbot"
 ATS_IOT_ENDPOINT_HOST = "a19u360l2irzg8-ats.iot.us-east-1.amazonaws.com"
 ATS_IOT_ENDPOINT_PORT = 8883
 
+IMAGE_PATH = "/home/pi/dogbot/images"
+
 class Dogbot:
     DOGBOT_ON_THING_STATE_KEY = "dogbot_on"
     MEAL_THING_STATE_KEY = "meal"
@@ -30,21 +32,23 @@ class Dogbot:
     READY_THING_STATE_VALUE = "ready"
     DISPENSE_THING_STATE_VALUE = "dispense"
     DISPENSE_SCHEDULED_THING_STATE_VALUE = "dispense_scheduled"
-
+  
     MEAL_SLACK_IMAGE_MESSAGE = "{dog_name} time to eat!"
     TREAT_SLACK_IMAGE_MESSAGE = "{dog_name} here is a treat!"
     WATER_SLACK_IMAGE_MESSAGE = "{dog_name} more water!"
-
-    MEAL_AUGER_MOTOR_PIN = 13
-    TREAT_AUGER_MOTOR_PIN = 19
-    WATER_RELAY_PIN = 26
  
+    MEAL_AUGER_MOTOR_PIN = 25
+    TREAT_AUGER_MOTOR_PIN = 17
+    WATER_RELAY_PIN = 27 
+    DOOR_MOTOR_FORWARD_PIN = 23
+    DOOR_MOTOR_DIRECTION_PIN = 24
+
     # slight duration changes in run time determine how many treats, or amount of food
     # and water dispenses - ideally a motor with lower rotation per minute (rpm) would
     # be used, but these faster motors were what I had on hand, or pwm could be used
     # to control motor speed
-    TREAT_AUGER_MOTOR_RUN_SEC = 5
-    MEAL_AUGER_MOTOR_RUN_SEC = 8
+    TREAT_AUGER_MOTOR_RUN_SEC = 4
+    MEAL_AUGER_MOTOR_RUN_SEC = 6
     REFILL_WATER_RELAY_ON_SEC = 20
   
     DOGBOT_STATE_IDLE = 0
@@ -60,7 +64,7 @@ class Dogbot:
     THIRD_CAMERA_CAPTURE_DELAY_SEC = 30
 
     SHADOW_OPERATION_TIMEOUT_SEC = 30
-
+ 
     def __init__(self, dog_name, shadow_name, ats_endpoint_host, ats_endpoint_port):
         self.dog_name = dog_name
         self.shadow_name = shadow_name
@@ -82,12 +86,14 @@ class Dogbot:
         self.pause_meal_enabled = False
  
         self.idle_color_index = 1
-
+ 
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(Dogbot.MEAL_AUGER_MOTOR_PIN, GPIO.OUT, initial=GPIO.HIGH)
         GPIO.setup(Dogbot.TREAT_AUGER_MOTOR_PIN, GPIO.OUT, initial=GPIO.HIGH)
         GPIO.setup(Dogbot.WATER_RELAY_PIN, GPIO.OUT, initial=GPIO.HIGH)
+        GPIO.setup(Dogbot.DOOR_MOTOR_FORWARD_PIN, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(Dogbot.DOOR_MOTOR_DIRECTION_PIN, GPIO.OUT, initial=GPIO.LOW)
 
         self.shadow_handler = None
         while self.shadow_handler == None:
@@ -103,6 +109,29 @@ class Dogbot:
         self.strip = neopixel_util.init_strip()
 
     def start(self):
+                
+        # # FORWARD
+        # GPIO.output(Dogbot.DOOR_MOTOR_FORWARD_PIN, GPIO.HIGH)
+        # GPIO.output(Dogbot.DOOR_MOTOR_DIRECTION_PIN, GPIO.LOW)
+        # time.sleep(10)
+
+        # # STOP
+        # GPIO.output(Dogbot.DOOR_MOTOR_FORWARD_PIN, GPIO.HIGH)
+        # time.sleep(1)
+        # GPIO.output(Dogbot.DOOR_MOTOR_FORWARD_PIN, GPIO.LOW)
+        # GPIO.output(Dogbot.DOOR_MOTOR_DIRECTION_PIN, GPIO.LOW)
+
+        # # REVERSE
+        # GPIO.output(Dogbot.DOOR_MOTOR_FORWARD_PIN, GPIO.HIGH)
+        # GPIO.output(Dogbot.DOOR_MOTOR_DIRECTION_PIN, GPIO.HIGH)
+        # time.sleep(10)
+
+        # # STOP 
+        # GPIO.output(Dogbot.DOOR_MOTOR_FORWARD_PIN, GPIO.HIGH)
+        # time.sleep(1)
+        # GPIO.output(Dogbot.DOOR_MOTOR_FORWARD_PIN, GPIO.LOW)
+        # GPIO.output(Dogbot.DOOR_MOTOR_DIRECTION_PIN, GPIO.LOW)
+
         # if any pending requests for meal, treat, or water while offline ignore
         self.update_shadow_reported(Dogbot.DOGBOT_ON_THING_STATE_KEY,
                                     True)
@@ -149,7 +178,7 @@ class Dogbot:
             self.dogbot_state_active_interrupt.set()
 
     def send_rekognized_dog_to_slack(self, slack_image_title, delay_sec=0):
-        image_filename = "/tmp/%s.jpg" % str(uuid.uuid4())
+        image_filename = IMAGE_PATH + "/%s.jpg" % str(uuid.uuid4())
 
         try:
             time.sleep(delay_sec)
@@ -162,11 +191,13 @@ class Dogbot:
         try:
             if rekognition_util.rekognize_label_in_image(image_filename, Dogbot.REKOGNITION_LABEL_MATCH):
                 slack_util.post_image_to_slack(image_filename, slack_image_title)
+            else:
+                os.remove(image_filename)
         except Exception as e:
             logging.error("unable to send rekognized dog to slack: %s" % e)
         finally:
             self.release_image_transfer_lock()
-            os.remove(image_filename)
+            
 
     def shadow_get_callback(self, payload, response_status, token):
         logging.info("shadow check (%s)" % response_status)
@@ -449,4 +480,7 @@ def main():
     dogbot.start()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        logging.exception("main crashed")        

@@ -8,7 +8,7 @@ CAMERA_WARMUP_SEC = 2
 CAMERA_ROTATION_DEG = 180 # rotating based on physical placement in cabinet
 CAMERA_X_RES_PX = 1024 # max 2592 
 CAMERA_Y_RES_PX = 768 # max 1944
-  
+    
 def init_camera():
     camera = None
     try:
@@ -22,7 +22,7 @@ def init_camera():
         logging.error("unable to initialize camera: %s" % e)
 
     return camera
-
+ 
 def camera_capture(camera, filename):
     camera.capture(filename)
     logging.info("camera photo captured")
