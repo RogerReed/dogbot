@@ -1,6 +1,6 @@
-# Building a Pet Monitoring Solution with AWS IoT and Alexa
+# Alexa Dog Feeder with AWS IoT
 Check out the associated blog with this source repo for more detail on the build.
-http://alexa-dogbot.blogspot.com/
+http://alexa-dog-feeder.blogspot.com/
 
 ## Development
 ### MacOS
